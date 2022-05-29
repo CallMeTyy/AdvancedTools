@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Tessellation
+  m_Name: Fixed_Tessellation
   m_Shader: {fileID: 4800000, guid: 583aa0ad7981c9947b2e7c2fbac58446, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -34,7 +34,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Displacement: 1
+    - _Displacement: 0.3
     - _Tess: 32
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 0}

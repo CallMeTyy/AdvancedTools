@@ -2,11 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
-public class FPSCounter : MonoBehaviour
+public class Log : MonoBehaviour
 {
     [SerializeField] private string fileName = "FPS_Log";
     [SerializeField] private float runTime = 10f;
@@ -60,6 +58,9 @@ public class FPSCounter : MonoBehaviour
 
         File.AppendAllText(filePath, $"Average FPS: {averageFPS}\n");
         File.AppendAllText(filePath, $"Total FPS Measured: {FPSCount}\n\n");
+        File.AppendAllText(filePath, $"Total Vertex Count: {UnityEditor.UnityStats.vertices}\n");
+        File.AppendAllText(filePath, $"Total Triangle Count: {UnityEditor.UnityStats.triangles}\n\n");
+        File.AppendAllText(filePath, $"===============\n\n");
         
         File.AppendAllText(filePath, $"All FPS Values:\n");
         foreach(int FPS_Value in FPS_List)
