@@ -28,7 +28,7 @@ public class MeshBuilder : MonoBehaviour
         newNormals[2] = Vector3.up;
         newNormals[3] = Vector3.up;
 
-        int[] newTriangles = new int[] {2, 1, 0, 1,2,3};
+        int[] newTriangles = new int[] {2, 1, 0};
         
         GetComponent<MeshFilter>().mesh = mesh;
         mesh.vertices = newVertices;
@@ -36,7 +36,7 @@ public class MeshBuilder : MonoBehaviour
         mesh.triangles = newTriangles;
         mesh.normals = newNormals;
         
-        AssetDatabase.CreateAsset(mesh, "Assets/LowVertexPlane.asset");
+        AssetDatabase.CreateAsset(mesh, "Assets/LowVertexTriangle.asset");
         AssetDatabase.SaveAssets();
     }
 }

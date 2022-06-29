@@ -56,6 +56,7 @@ Shader "Custom/Tessellation"
                 worldpos.z * UNITY_PI * _Waves) * _Displacement;
             
             v.vertex.y += d + 1;
+
         }
 
         
