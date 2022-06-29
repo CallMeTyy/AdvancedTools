@@ -34,9 +34,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Displacement: 0.3
-    - _Tess: 32
+    - _Displacement: 0.28
+    - _Tess: 3
+    - _WaveSpeed: 20
+    - _Waves: 0.3
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 0}
-    - _SpecColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+    - _Color: {r: 0.41852084, g: 0.9339623, b: 0.89794815, a: 0}
+    - _SpecColor: {r: 0, g: 0.2205637, b: 0.2830189, a: 0.5}
   m_BuildTextureStacks: []

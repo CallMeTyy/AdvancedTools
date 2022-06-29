@@ -15,6 +15,8 @@ public class Log : MonoBehaviour
 
     private float deltaTime = 0;
     
+    
+    
     void Start()
     {
         FPS_List = new List<float>();
@@ -58,8 +60,8 @@ public class Log : MonoBehaviour
 
         File.AppendAllText(filePath, $"Average FPS: {averageFPS}\n");
         File.AppendAllText(filePath, $"Total FPS Measured: {FPSCount}\n\n");
-        File.AppendAllText(filePath, $"Total Vertex Count: {UnityEditor.UnityStats.vertices}\n");
-        File.AppendAllText(filePath, $"Total Triangle Count: {UnityEditor.UnityStats.triangles}\n\n");
+        File.AppendAllText(filePath, $"Total Vertex Count: {UnityEditor.UnityStats.vertices-4}\n");
+        File.AppendAllText(filePath, $"Total Triangle Count: {UnityEditor.UnityStats.triangles-2}\n\n");
         File.AppendAllText(filePath, $"===============\n\n");
         
         File.AppendAllText(filePath, $"All FPS Values:\n");
