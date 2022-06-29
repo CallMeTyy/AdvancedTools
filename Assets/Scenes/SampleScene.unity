@@ -358,7 +358,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3389807062276813011, guid: 8d8b18cc2eeafd249807fe51440c1eb2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d8b18cc2eeafd249807fe51440c1eb2, type: 3}
@@ -393,6 +393,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fileName: Log
   runTime: 10
+  shaderMaterial: {fileID: 2100000, guid: 93c882d33c4089a458205b3b5022500b, type: 2}
 --- !u!4 &1931611508
 Transform:
   m_ObjectHideFlags: 0
@@ -420,13 +421,14 @@ GameObject:
   - component: {fileID: 1940894376}
   - component: {fileID: 1940894375}
   - component: {fileID: 1940894374}
+  - component: {fileID: 1940894378}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1940894374
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -506,6 +508,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1940894378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1940894373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6a5f683ca983d3479d6c72b0a0c5adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5292927081414122526
 PrefabInstance:
   m_ObjectHideFlags: 0

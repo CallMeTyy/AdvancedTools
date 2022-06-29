@@ -9,6 +9,7 @@ Shader "Custom/Tessellation"
         _Displacement ("Displacement", Range(0, 1.0)) = 0.3
         _Waves ("Waves", Range(0, 5.0)) = 1.0
         _WaveSpeed ("WaveSpeed", Range(0, 50)) = 5
+        _VertexCount ("VertexCount", int) = 0
         _Color ("Color", color) = (1,1,1,0)
         _SpecColor ("Spec color", color) = (0.5,0.5,0.5,0.5)
     }
@@ -30,8 +31,8 @@ Shader "Custom/Tessellation"
             float4 tangent : TANGENT;
             float3 normal : NORMAL;
             float2 texcoord : TEXCOORD0;
+            //float1 vertexCount : FLOAT;
         };
-
 
         float _Tess;
 
@@ -39,11 +40,13 @@ Shader "Custom/Tessellation"
         {
             return _Tess;
         }
+        
 
         sampler2D _DispTex;
         float _Displacement;
         float _Waves;
         int _WaveSpeed;
+        int _VertexCount;
 
         void disp(inout appdata v)
         {
@@ -51,8 +54,11 @@ Shader "Custom/Tessellation"
             float3 worldpos = mul(unity_ObjectToWorld, v.vertex);
             float d = sin(worldpos.x * UNITY_PI * _Waves + _Time * _WaveSpeed) * _Displacement + cos(
                 worldpos.z * UNITY_PI * _Waves) * _Displacement;
+            
             v.vertex.y += d + 1;
         }
+
+        
 
         struct Input
         {
