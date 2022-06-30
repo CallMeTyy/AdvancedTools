@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -10,11 +11,13 @@ public class MeshBuilder : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CreatePlaneWithTriangleCount(288);
+        CreatePlaneWithTriangleCount(TriangleCount);
     }
+    
 
-    private void CreatePlaneWithTriangleCount(int Count)
+    public void CreatePlaneWithTriangleCount(int Count = -1)
     {
+        if (Count == -1) Count = TriangleCount;
         int trianglesCreated = 0;
         int wh = Mathf.CeilToInt(Mathf.Sqrt(Count/2));
         List<Vector3> vertices = new List<Vector3>();
@@ -37,27 +40,36 @@ public class MeshBuilder : MonoBehaviour
             if ((i+1) % (wh+1) != 0 && trianglesCreated < Count && i < (wh*(wh+1)-1))
             {
                 int row = wh + 1;
-                trianglesCreated += 2;
+                trianglesCreated++;
                 triangles.Add(i+1);
                 triangles.Add(i);
                 triangles.Add(i+row);
-            
-                triangles.Add(i+1+row);
-                triangles.Add(i+1);
-                triangles.Add(i+row); 
+                if (trianglesCreated < Count)
+                {
+                    trianglesCreated++;
+                    triangles.Add(i+1+row);
+                    triangles.Add(i+1);
+                    triangles.Add(i+row); 
+                }
             }
         }
         
         Mesh mesh = new Mesh();
-        GetComponent<MeshFilter>().mesh = mesh;
+        //GetComponent<MeshFilter>().mesh = mesh;
         mesh.vertices = vertices.ToArray();
         mesh.uv = uv.ToArray();
         mesh.triangles = triangles.ToArray();
         print(triangles.Count);
         mesh.normals = normals.ToArray();
         
-        AssetDatabase.CreateAsset(mesh, $"Assets/PlaneWith{Count}Triangles.asset");
+        AssetDatabase.CreateAsset(mesh, $"Assets/Meshes/CustomPlaneWithSetTriangles.asset");
         AssetDatabase.SaveAssets();
+        print("Saved Mesh");
+
+        foreach (GameObject g in GameObject.FindGameObjectsWithTag("Triangle"))
+        {
+            g.GetComponent<MeshFilter>().mesh = mesh;
+        }
     }
 
     private void CreateSmallPlane()
@@ -84,13 +96,13 @@ public class MeshBuilder : MonoBehaviour
 
         int[] newTriangles = new int[] {2, 1, 0};
         
-        GetComponent<MeshFilter>().mesh = mesh;
+        //GetComponent<MeshFilter>().mesh = mesh;
         mesh.vertices = newVertices;
         mesh.uv = newUV;
         mesh.triangles = newTriangles;
         mesh.normals = newNormals;
         
-        AssetDatabase.CreateAsset(mesh, "Assets/LowVertexTriangle.asset");
+        AssetDatabase.CreateAsset(mesh, "Assets/Meshes/LowVertexTriangle.asset");
         AssetDatabase.SaveAssets();
     }
 }
