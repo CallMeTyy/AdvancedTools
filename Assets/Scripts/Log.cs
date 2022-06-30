@@ -18,6 +18,7 @@ public class Log : MonoBehaviour
 
     public bool isRunningTriangle;
     public bool isRunningTessellation;
+    public bool isVR;
     
     
     
@@ -68,6 +69,7 @@ public class Log : MonoBehaviour
 
         File.AppendAllText(filePath, $"Average FPS: {averageFPS}\n");
         File.AppendAllText(filePath, $"Total FPS Measured: {FPSCount}\n\n");
+        if (isVR) File.AppendAllText(filePath, $"Running VR!\n\n");
         if (isRunningTessellation)
         {
             float tessellation = shaderMaterial.GetFloat("_Tess");

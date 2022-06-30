@@ -74,7 +74,9 @@ Shader "Custom/Tessellation"
 
         void surf(Input IN, inout SurfaceOutput o)
         {
-            half4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color * IN.worldPos.y;
+            float d = sin(IN.worldPos.x * UNITY_PI * _Waves + _Time * _WaveSpeed) * _Displacement + cos(
+                IN.worldPos.z * UNITY_PI * _Waves) * _Displacement;
+            half4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color * (d+1);
             o.Albedo = c.rgb;
             o.Specular = 0.2;
             o.Gloss = 1.0;
