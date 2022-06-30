@@ -240,7 +240,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3389807062276813011, guid: 8d8b18cc2eeafd249807fe51440c1eb2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3389807062298004320, guid: 8d8b18cc2eeafd249807fe51440c1eb2, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -836,7 +836,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3389807062276813011, guid: 8d8b18cc2eeafd249807fe51440c1eb2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3389807062298004323, guid: 8d8b18cc2eeafd249807fe51440c1eb2, type: 3}
       propertyPath: m_TagString
@@ -952,8 +952,8 @@ MonoBehaviour:
   fileName: Log
   runTime: 10
   shaderMaterial: {fileID: 2100000, guid: 93c882d33c4089a458205b3b5022500b, type: 2}
-  isRunningTriangle: 1
-  isRunningTessellation: 0
+  isRunningTriangle: 0
+  isRunningTessellation: 1
 --- !u!4 &1931611508
 Transform:
   m_ObjectHideFlags: 0

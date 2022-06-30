@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Log : MonoBehaviour
 {
-    [SerializeField] private string fileName = "FPS_Log";
+    [SerializeField] private string fileName = "Log";
     [SerializeField] private float runTime = 10f;
     [SerializeField] private Material shaderMaterial;
 
@@ -40,12 +40,16 @@ public class Log : MonoBehaviour
     private void CheckFile()
     {
         int num = 0;
+        string fileNameWithPrefix = "";
+        if (isRunningTessellation) fileNameWithPrefix = "Tess_";
+        if (isRunningTriangle) fileNameWithPrefix = "Tri_";
+        fileNameWithPrefix += fileName;
         string date = DateTime.Now.ToString("yyyy-dd-M");
-        filePath = $"{Application.dataPath}/Logs/{fileName}_{date}_{num}.txt";
+        filePath = $"{Application.dataPath}/Logs/{fileNameWithPrefix}_{date}_{num}.txt";
         while (File.Exists(filePath))
         {
             num++;
-            filePath = $"{Application.dataPath}/Logs/{fileName}_{date}_{num}.txt";
+            filePath = $"{Application.dataPath}/Logs/{fileNameWithPrefix}_{date}_{num}.txt";
         }
         File.WriteAllText(filePath, "");
     }
