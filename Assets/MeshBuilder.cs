@@ -5,8 +5,62 @@ using UnityEngine;
 
 public class MeshBuilder : MonoBehaviour
 {
+    public int TriangleCount;
+
     // Start is called before the first frame update
     void Start()
+    {
+        CreatePlaneWithTriangleCount(288);
+    }
+
+    private void CreatePlaneWithTriangleCount(int Count)
+    {
+        int trianglesCreated = 0;
+        int wh = Mathf.CeilToInt(Mathf.Sqrt(Count/2));
+        List<Vector3> vertices = new List<Vector3>();
+        List<Vector2> uv = new List<Vector2>();
+        List<Vector3> normals = new List<Vector3>();
+        List<int> triangles = new List<int>();
+        //Create Vertices
+        for (float z = 0; z <= wh; z++)
+        {
+            for (float x = 0; x <= wh; x++)
+            {
+                vertices.Add(new Vector3(x/wh-0.5f, 0, z/wh-0.5f));
+                uv.Add(new Vector2(x / wh, z / wh));
+                normals.Add(Vector3.up);
+            }
+        }
+
+        for (int i = 0; i < vertices.Count; i++)
+        {
+            if ((i+1) % (wh+1) != 0 && trianglesCreated < Count && i < (wh*(wh+1)-1))
+            {
+                int row = wh + 1;
+                trianglesCreated += 2;
+                triangles.Add(i+1);
+                triangles.Add(i);
+                triangles.Add(i+row);
+            
+                triangles.Add(i+1+row);
+                triangles.Add(i+1);
+                triangles.Add(i+row); 
+            }
+        }
+        
+        Mesh mesh = new Mesh();
+        GetComponent<MeshFilter>().mesh = mesh;
+        mesh.vertices = vertices.ToArray();
+        mesh.uv = uv.ToArray();
+        mesh.triangles = triangles.ToArray();
+        print(triangles.Count);
+        mesh.normals = normals.ToArray();
+        
+        AssetDatabase.CreateAsset(mesh, $"Assets/PlaneWith{Count}Triangles.asset");
+        AssetDatabase.SaveAssets();
+    }
+
+    private void CreateSmallPlane()
     {
         Mesh mesh = new Mesh();
 
