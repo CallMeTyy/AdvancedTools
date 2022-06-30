@@ -7,19 +7,43 @@ using UnityEngine;
 public class MeshBuilder : MonoBehaviour
 {
     public int TriangleCount;
+    public bool debug;
+    
+
+    [SerializeField] private Material _mat;
 
     // Start is called before the first frame update
     void Start()
     {
-        CreatePlaneWithTriangleCount(TriangleCount);
+        //CreatePlaneWithTriangleCount(TriangleCount);
     }
-    
+
+    public void CreatePlaneWithTessellationAmount(float tessellation = -1)
+    {
+        int triCount;
+        if (tessellation == -1)
+        {
+            tessellation = _mat.GetFloat("_Tess");
+            triCount = TriangleCounter.CalculateTrianglesWithTessellation(2,
+                tessellation);
+        }
+        else
+        {
+            triCount = TriangleCounter.CalculateTrianglesWithTessellation(2,
+                tessellation);
+        }
+        print(tessellation);
+        print(triCount);
+        CreatePlaneWithTriangleCount(triCount);
+    }
+
 
     public void CreatePlaneWithTriangleCount(int Count = -1)
     {
         if (Count == -1) Count = TriangleCount;
         int trianglesCreated = 0;
-        int wh = Mathf.CeilToInt(Mathf.Sqrt(Count/2));
+        int wh = Mathf.CeilToInt(Mathf.Sqrt(Count/2f));
+        print(wh);
         List<Vector3> vertices = new List<Vector3>();
         List<Vector2> uv = new List<Vector2>();
         List<Vector3> normals = new List<Vector3>();
@@ -59,7 +83,7 @@ public class MeshBuilder : MonoBehaviour
         mesh.vertices = vertices.ToArray();
         mesh.uv = uv.ToArray();
         mesh.triangles = triangles.ToArray();
-        print(triangles.Count);
+        if (debug) print(triangles.Count);
         mesh.normals = normals.ToArray();
         
         AssetDatabase.CreateAsset(mesh, $"Assets/Meshes/CustomPlaneWithSetTriangles.asset");

@@ -28,7 +28,7 @@ public class TriangleCounter : MonoBehaviour
     public static int CalculateTriangleCountAfterTessellation(int triangleCount, int Tessellation, int loopCount = 1, int prevNum = 0, int tessCount = 1)
     {
         int addAmount = (loopCount - 1) * 4;
-        print($"Added Amount - {addAmount}");
+        //print($"Added Amount - {addAmount}");
         prevNum += addAmount;
 
         if (tessCount == Tessellation) {
@@ -36,8 +36,8 @@ public class TriangleCounter : MonoBehaviour
             {
                 return triangleCount;
             }
-            print($"Total Multiplier - {prevNum}");
-            return (prevNum) * triangleCount + 1;
+            //print($"Total Multiplier - {prevNum}");
+            return (prevNum * 3) * triangleCount + triangleCount;
         }	
         
         loopCount++;

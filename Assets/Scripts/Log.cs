@@ -15,6 +15,9 @@ public class Log : MonoBehaviour
     private string filePath = "";
 
     private float deltaTime = 0;
+
+    public bool isRunningTriangle;
+    public bool isRunningTessellation;
     
     
     
@@ -61,9 +64,19 @@ public class Log : MonoBehaviour
 
         File.AppendAllText(filePath, $"Average FPS: {averageFPS}\n");
         File.AppendAllText(filePath, $"Total FPS Measured: {FPSCount}\n\n");
-        float tessellation = shaderMaterial.GetFloat("_Tess");
-        File.AppendAllText(filePath, $"Total Tessellation Amount: {tessellation}\n");
-        File.AppendAllText(filePath, $"Total Triangle Count: {TriangleCounter.CalculateTrianglesWithTessellation(UnityEditor.UnityStats.triangles-2, tessellation)}\n\n");
+        if (isRunningTessellation)
+        {
+            float tessellation = shaderMaterial.GetFloat("_Tess");
+            File.AppendAllText(filePath, $"Logged data for Tessellation run!\n");
+            File.AppendAllText(filePath, $"Total Tessellation Amount: {tessellation}\n");
+            File.AppendAllText(filePath, $"Total Triangle Count: {TriangleCounter.CalculateTrianglesWithTessellation(UnityEditor.UnityStats.triangles-2, tessellation)}\n\n");
+        }
+        if (isRunningTriangle)
+        {
+            File.AppendAllText(filePath, $"Logged data for Triangle run!\n");
+            File.AppendAllText(filePath, $"Total Triangle Count: {UnityEditor.UnityStats.triangles-2}\n\n");
+        }
+        
         File.AppendAllText(filePath, $"===============\n\n");
         
         File.AppendAllText(filePath, $"All FPS Values:\n");

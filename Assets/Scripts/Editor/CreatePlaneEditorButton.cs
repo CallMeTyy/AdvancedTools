@@ -14,6 +14,12 @@ public class CreatePlaneEditorButton : Editor
         {
             myScript.CreatePlaneWithTriangleCount();
         }
+        
+        
+        if (GUILayout.Button("Generate Mesh From Tessellation"))
+        {
+            myScript.CreatePlaneWithTessellationAmount();
+        }
     }
 
 }
