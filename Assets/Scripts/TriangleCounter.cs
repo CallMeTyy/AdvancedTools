@@ -18,14 +18,14 @@ public class TriangleCounter : MonoBehaviour
         print($"Total Triangles - {count}");*/
     }
 
-    public static int CalculateTrianglesWithTessellation(int triangleCount, float tessellation)
+    public static long CalculateTrianglesWithTessellation(int triangleCount, float tessellation)
     {
         int tessellationRounded = Mathf.CeilToInt(tessellation);
         int tessellationRoundedToCeilUneven = tessellationRounded % 2 == 0 ? tessellationRounded + 1 : tessellationRounded;
         return CalculateTriangleCountAfterTessellation(triangleCount, tessellationRoundedToCeilUneven);
     }
     
-    public static int CalculateTriangleCountAfterTessellation(int triangleCount, int Tessellation, int loopCount = 1, int prevNum = 0, int tessCount = 1)
+    public static long CalculateTriangleCountAfterTessellation(int triangleCount, int Tessellation, int loopCount = 1, int prevNum = 0, int tessCount = 1)
     {
         int addAmount = (loopCount - 1) * 4;
         //print($"Added Amount - {addAmount}");

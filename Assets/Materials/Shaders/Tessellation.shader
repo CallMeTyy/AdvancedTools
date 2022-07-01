@@ -2,7 +2,7 @@ Shader "Custom/Tessellation"
 {
     Properties
     {
-        _Tess ("Tessellation", Range(1,32)) = 4
+        _Tess ("Tessellation", Range(1,64)) = 4
         _MainTex ("Base (RGB)", 2D) = "white" {}
         _DispTex ("Disp Texture", 2D) = "gray" {}
         _NormalMap ("Normalmap", 2D) = "bump" {}

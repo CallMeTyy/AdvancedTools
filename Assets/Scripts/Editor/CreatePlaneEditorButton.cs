@@ -20,6 +20,11 @@ public class CreatePlaneEditorButton : Editor
         {
             myScript.CreatePlaneWithTessellationAmount();
         }
+        
+        if (GUILayout.Button("Calculate Triangle Count"))
+        {
+            myScript.CalculateTriCount();
+        }
     }
 
 }

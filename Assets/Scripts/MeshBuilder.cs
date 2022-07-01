@@ -18,9 +18,18 @@ public class MeshBuilder : MonoBehaviour
         //CreatePlaneWithTriangleCount(TriangleCount);
     }
 
+    public void CalculateTriCount()
+    {
+        float tessellation = _mat.GetFloat("_Tess");
+        int tessellationRounded = Mathf.CeilToInt(tessellation);
+        int tessellationRoundedToCeilUneven = tessellationRounded % 2 == 0 ? tessellationRounded + 1 : tessellationRounded;
+        long triCount = TriangleCounter.CalculateTrianglesWithTessellation(20000, tessellation);
+        print($"Tessellation {tessellation} has {triCount} triangles");
+    }
+
     public void CreatePlaneWithTessellationAmount(float tessellation = -1)
     {
-        int triCount;
+        long triCount;
         if (tessellation == -1)
         {
             tessellation = _mat.GetFloat("_Tess");
@@ -36,9 +45,7 @@ public class MeshBuilder : MonoBehaviour
         print(triCount);
         CreatePlaneWithTriangleCount(triCount);
     }
-
-
-    public void CreatePlaneWithTriangleCount(int Count = -1)
+    public void CreatePlaneWithTriangleCount(long Count = -1)
     {
         if (Count == -1) Count = TriangleCount;
         int trianglesCreated = 0;
@@ -128,5 +135,65 @@ public class MeshBuilder : MonoBehaviour
         
         AssetDatabase.CreateAsset(mesh, "Assets/Meshes/LowVertexTriangle.asset");
         AssetDatabase.SaveAssets();
+    }
+    
+    public static void CreatePlaneWithTessellation(float tessellation)
+    {
+        long Count = TriangleCounter.CalculateTrianglesWithTessellation(2,
+            tessellation);
+        
+        int trianglesCreated = 0;
+        int wh = Mathf.CeilToInt(Mathf.Sqrt(Count/2f));
+        print(wh);
+        List<Vector3> vertices = new List<Vector3>();
+        List<Vector2> uv = new List<Vector2>();
+        List<Vector3> normals = new List<Vector3>();
+        List<int> triangles = new List<int>();
+        //Create Vertices
+        for (float z = 0; z <= wh; z++)
+        {
+            for (float x = 0; x <= wh; x++)
+            {
+                vertices.Add(new Vector3(x/wh-0.5f, 0, z/wh-0.5f));
+                uv.Add(new Vector2(x / wh, z / wh));
+                normals.Add(Vector3.up);
+            }
+        }
+
+        for (int i = 0; i < vertices.Count; i++)
+        {
+            if ((i+1) % (wh+1) != 0 && trianglesCreated < Count && i < (wh*(wh+1)-1))
+            {
+                int row = wh + 1;
+                trianglesCreated++;
+                triangles.Add(i+1);
+                triangles.Add(i);
+                triangles.Add(i+row);
+                if (trianglesCreated < Count)
+                {
+                    trianglesCreated++;
+                    triangles.Add(i+1+row);
+                    triangles.Add(i+1);
+                    triangles.Add(i+row); 
+                }
+            }
+        }
+        
+        Mesh mesh = new Mesh();
+        //GetComponent<MeshFilter>().mesh = mesh;
+        mesh.vertices = vertices.ToArray();
+        mesh.uv = uv.ToArray();
+        mesh.triangles = triangles.ToArray();
+
+        mesh.normals = normals.ToArray();
+        
+        AssetDatabase.CreateAsset(mesh, $"Assets/Meshes/CustomPlaneWithSetTriangles.asset");
+        AssetDatabase.SaveAssets();
+        print("Saved Mesh");
+
+        foreach (GameObject g in GameObject.FindGameObjectsWithTag("Triangle"))
+        {
+            g.GetComponent<MeshFilter>().mesh = mesh;
+        }
     }
 }

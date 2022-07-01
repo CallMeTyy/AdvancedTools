@@ -9,6 +9,7 @@ public class Log : MonoBehaviour
     [SerializeField] private string fileName = "Log";
     [SerializeField] private float runTime = 10f;
     [SerializeField] private Material shaderMaterial;
+    [SerializeField] private int fpsMargin = 10;
 
     
     private List<float> FPS_List = null;
@@ -19,11 +20,24 @@ public class Log : MonoBehaviour
     public bool isRunningTriangle;
     public bool isRunningTessellation;
     public bool isVR;
+
+    public int RunsBeforeStop = 1;
+    
+    public bool IncreaseTessellationOnNextRun;
+    public int StopAtTessellation;
+    public int TessellationIncrement = 2;
+    
+    private int run;
+    private float tessellation;
+    private long triCount;
     
     
     
     void Start()
     {
+        run = PlayerPrefs.GetInt("Run", 1);
+        tessellation = shaderMaterial.GetFloat("_Tess");
+        print($"Started Run {run} on Tessellation {tessellation}");
         FPS_List = new List<float>();
         
         CheckFile();
@@ -42,8 +56,8 @@ public class Log : MonoBehaviour
     {
         int num = 0;
         string fileNameWithPrefix = "";
-        if (isRunningTessellation) fileNameWithPrefix = "Tess_";
-        if (isRunningTriangle) fileNameWithPrefix = "Tri_";
+        if (isRunningTessellation) fileNameWithPrefix = $"Tess_R{run}_";
+        if (isRunningTriangle) fileNameWithPrefix = $"Tri_R{run}_";
         fileNameWithPrefix += fileName;
         string date = DateTime.Now.ToString("yyyy-dd-M");
         filePath = $"{Application.dataPath}/Logs/{fileNameWithPrefix}_{date}_{num}.txt";
@@ -62,34 +76,49 @@ public class Log : MonoBehaviour
         int FPSCount = FPS_List.Count;
         float allFPS = 0;
 
+        // Get a median to filter out unwanted FPS spikes
+        float median = FPS_List[FPSCount / 2];
+        
+        
         foreach (float FPS_Value in FPS_List)
-            allFPS += FPS_Value;
+        {
+            if (Mathf.Abs(FPS_Value - median) < fpsMargin) allFPS += FPS_Value;
+            else FPSCount--;
+        }
+            
 
         float averageFPS = allFPS / FPSCount;
+        triCount = 0;
 
         File.AppendAllText(filePath, $"Average FPS: {averageFPS}\n");
         File.AppendAllText(filePath, $"Total FPS Measured: {FPSCount}\n\n");
         if (isVR) File.AppendAllText(filePath, $"Running VR!\n\n");
         if (isRunningTessellation)
         {
-            float tessellation = shaderMaterial.GetFloat("_Tess");
             File.AppendAllText(filePath, $"Logged data for Tessellation run!\n");
             File.AppendAllText(filePath, $"Total Tessellation Amount: {tessellation}\n");
-            File.AppendAllText(filePath, $"Total Triangle Count: {TriangleCounter.CalculateTrianglesWithTessellation(UnityEditor.UnityStats.triangles-2, tessellation)}\n\n");
+            triCount = TriangleCounter.CalculateTrianglesWithTessellation(UnityEditor.UnityStats.triangles - 2,
+                tessellation);
         }
         if (isRunningTriangle)
         {
             File.AppendAllText(filePath, $"Logged data for Triangle run!\n");
-            File.AppendAllText(filePath, $"Total Triangle Count: {UnityEditor.UnityStats.triangles-2}\n\n");
+            triCount = UnityEditor.UnityStats.triangles - 2;
         }
-        
+
+        File.AppendAllText(filePath, $"Total Triangle Count: {triCount}\n\n");
         File.AppendAllText(filePath, $"===============\n\n");
         
         File.AppendAllText(filePath, $"All FPS Values:\n");
-        foreach(int FPS_Value in FPS_List)
-            File.AppendAllText(filePath, $"{FPS_Value}\n");
+        foreach (int FPS_Value in FPS_List)
+        {
+            string fps = Mathf.Abs(FPS_Value - median) < fpsMargin ? $"-{FPS_Value}-" : FPS_Value.ToString();
+            File.AppendAllText(filePath, $"{fps}\n"); 
+        }
+            
         
         Debug.Log("File Generated");
+        CreateMultiLogFile(averageFPS);
     }
 
     private IEnumerator Timer(float time)
@@ -97,9 +126,81 @@ public class Log : MonoBehaviour
         yield return new WaitForSeconds(time);
         WriteValues();
         #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-        #else
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
             Application.Quit();
         #endif
+    }
+
+
+    private void OnDestroy()
+    {
+        if (PlayerPrefs.GetInt("Stop", 0) == 1) return;
+        if (run < RunsBeforeStop)
+        {
+            PlayerPrefs.SetInt("Run", run + 1);
+
+            #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = true;
+            #endif
+        }
+        else
+        {
+            
+            if (IncreaseTessellationOnNextRun && tessellation < StopAtTessellation)
+            {
+                tessellation = Mathf.Min(tessellation + TessellationIncrement, 64);
+                
+                shaderMaterial.SetFloat("_Tess", tessellation);
+                
+                if (isRunningTriangle)
+                {
+                    MeshBuilder.CreatePlaneWithTessellation(tessellation);
+                }
+                
+                PlayerPrefs.SetInt("Run", 1);
+                StartNewRun();
+                
+#if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = true;
+#endif
+            }
+        }
+    }
+
+    public void StartTest()
+    {
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = true;
+        #endif
+        PlayerPrefs.SetInt("Run", 1);
+        PlayerPrefs.SetInt("Stop", 0);
+    }
+
+    public void StopTest()
+    {
+        PlayerPrefs.SetInt("Run", RunsBeforeStop);
+        PlayerPrefs.SetInt("Stop", 1);
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #endif
+    }
+
+    private void StartNewRun()
+    {
+        string path = $"{Application.dataPath}/Logs/MultiLog.txt";
+        string mode = "";
+        if (isRunningTessellation) mode = "Tessellation";
+        if (isRunningTriangle) mode = "Triangle";
+        DateTime date = DateTime.Now;
+        File.AppendAllText(path, $"\n=== FPS Log - {mode} - Tri: {triCount} - Tess: {tessellation} - {date.Day}/{date.Month} {date.Hour}:{date.Minute}:{date.Second} ===\n");
+    }
+
+    private void CreateMultiLogFile(float averageFPS)
+    {
+        if (run == 1) StartNewRun();
+        string path = $"{Application.dataPath}/Logs/MultiLog.txt";
+        //File.AppendAllText(filePath, $"=== FPS Log - {mode} - Tri: {triCount} - Tess: {tess} - {date.Day}/{date.Month} {date.Hour}:{date.Minute}:{date.Second} ===\n");
+        File.AppendAllText(path, $"Run {run}: Average FPS: {averageFPS}\n");
     }
 }
