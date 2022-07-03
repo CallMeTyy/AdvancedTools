@@ -46,6 +46,7 @@ This setup was created mainly using this [Unity Example](https://docs.unity3d.co
 ## The Tests
 
 **All tests were done using the following setup:**
+
 ![Alt image](https://i.ibb.co/HDSzgHx/Unity-Setup.png)
 
 There are three different steps to setting up a test:
@@ -56,9 +57,11 @@ There are three different steps to setting up a test:
 After each test, a log file is generated within the Logs folder, and an entry to the Multilog will give a more brief information regarding the test.
 
 **Example Log File:**
+
 ![Log](https://i.ibb.co/qmVLYXT/Log.png)
 
 **MultiLog:**
+
 ![MultiLog](https://i.ibb.co/cDwpk1H/Multilog.png)
 
 ### Test 1: Normal
@@ -82,9 +85,11 @@ The following tables show all the data gathered:
 ![MainTable](https://i.ibb.co/B3jbLrB/Main-Table.png)
 
 ##### Tessellation Data - Test 1
+
 ![TessTable](https://i.ibb.co/1dyBngK/Tessellation-Table.png)
 
 ##### Triangle Data - Test 1
+
 ![TriTable](https://i.ibb.co/tJJTgHv/Triangle-Table.png)
 
 ### Test 2: VR
@@ -94,6 +99,7 @@ The tests for VR were very similarly set up to the first tests. An XR-Origin (Op
 The following graph shows the results for the second test in VR:
 
 ### Test 2 Graph
+
 ![GraphTest2](https://i.ibb.co/qMBg6Tr/Graph2.png)
 
 This graph yields very similar but also very different results from the first test. Although there are the same amount of triangles, each triangle is rendered twice. This corresponds to roughly half the FPS and the drop in FPS being around half of what happens in a normal environment.
@@ -107,9 +113,11 @@ The following tables show all the data gathered:
 ![MainTable](https://i.ibb.co/PrNHsY4/Main-Table2.png)
 
 ##### Tessellation Data - Test 2
+
 ![TessTable](https://i.ibb.co/4gwYVWC/Tess-Table2.png)
 
 ##### Triangle Data - Test 2
+
 ![TriTable](https://i.ibb.co/r614Y6c/Tri-Table2.png)
 
 ## Conclusion
