@@ -48,15 +48,21 @@ public class MeshBuilder : MonoBehaviour
     }
     public void CreatePlaneWithTriangleCount(long Count = -1)
     {
+        // The width & height can be taken by taking the count,
+        // dividing it by two (as two triangles create a small plane)
+        // Taking the square root, and rounding it off to the top.
         if (Count == -1) Count = TriangleCount;
         int trianglesCreated = 0;
         int wh = Mathf.CeilToInt(Mathf.Sqrt(Count/2f));
         print(wh);
+        
+        //Create all lists
         List<Vector3> vertices = new List<Vector3>();
         List<Vector2> uv = new List<Vector2>();
         List<Vector3> normals = new List<Vector3>();
         List<int> triangles = new List<int>();
-        //Create Vertices
+        
+        //Create Vertices, uvs & normals
         for (float z = 0; z <= wh; z++)
         {
             for (float x = 0; x <= wh; x++)
@@ -67,6 +73,7 @@ public class MeshBuilder : MonoBehaviour
             }
         }
 
+        // Add the actual triangles & stop if we reached the triangle count
         for (int i = 0; i < vertices.Count; i++)
         {
             if ((i+1) % (wh+1) != 0 && trianglesCreated < Count && i < (wh*(wh+1)-1))
@@ -86,18 +93,20 @@ public class MeshBuilder : MonoBehaviour
             }
         }
         
+        // Create the mesh & add the date
         Mesh mesh = new Mesh();
-        //GetComponent<MeshFilter>().mesh = mesh;
         mesh.vertices = vertices.ToArray();
         mesh.uv = uv.ToArray();
         mesh.triangles = triangles.ToArray();
         if (debug) print(triangles.Count);
         mesh.normals = normals.ToArray();
         
+        //Save the mesh
         AssetDatabase.CreateAsset(mesh, $"Assets/Meshes/CustomPlaneWithSetTriangles.asset");
         AssetDatabase.SaveAssets();
         print("Saved Mesh");
 
+        //Apply the mesh to all triangle objects in the scene
         foreach (GameObject g in GameObject.FindGameObjectsWithTag("Triangle"))
         {
             g.GetComponent<MeshFilter>().mesh = mesh;

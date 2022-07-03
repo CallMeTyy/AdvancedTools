@@ -73,7 +73,7 @@ In total 25 different Tessellation amounts have been tested for both the Tessell
 In the following graph the averages of each run can be seen for both the Tessellated Meshes (orange) and Triangulated Meshes (gray).
 
 #### Test 1 Graph
-![GraphTest1](https://i.ibb.co/d6JzQdP/Graph1.png)
+![GraphTest1](https://i.ibb.co/0Bgzj3n/Graph1.png)
 
 From this graph it shows clearly that triangulated & tessellated meshes perform very similarly until a certain point, from where Tessellation becomes a lot more efficient. Around the 8.660.000 triangles the triangulated meshes start declining in performance, which keeps decreasing when more triangles are added. The tessellated meshes however have a massive dip around 60.740.000 triangles, and stabalize around 216.740.000 triangles. The FPS for the Tessellated meshes stays very managable, even under extreme conditions, whereas the Triangulated Meshes very soon starts dipping below acceptable FPS. Of course, this very much depends on the test setup, but here the tessellation managed to keep performance for a lot longer.
 
@@ -100,7 +100,7 @@ The following graph shows the results for the second test in VR:
 
 ### Test 2 Graph
 
-![GraphTest2](https://i.ibb.co/qMBg6Tr/Graph2.png)
+![GraphTest2](https://i.ibb.co/QCNdK3v/Graph2.png)
 
 This graph yields very similar but also very different results from the first test. Although there are the same amount of triangles, each triangle is rendered twice. This corresponds to roughly half the FPS and the drop in FPS being around half of what happens in a normal environment.
 
@@ -110,7 +110,7 @@ The following tables show all the data gathered:
 
 #### Main Data - Test 2
 
-![MainTable](https://i.ibb.co/PrNHsY4/Main-Table2.png)
+![MainTable](https://i.ibb.co/WyHSNLG/Main-Table2.png)
 
 ##### Tessellation Data - Test 2
 

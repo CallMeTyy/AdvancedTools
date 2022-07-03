@@ -47,7 +47,7 @@ public class Log : MonoBehaviour
 
     private void Update()
     {
-        deltaTime += (Time.deltaTime - deltaTime) * 0.1f; // https://answers.unity.com/questions/1189486/how-to-see-fps-frames-per-second.html
+        deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
         float fps = 1.0f / deltaTime;
         print(fps);
         FPS_List.Add(fps);
@@ -89,8 +89,6 @@ public class Log : MonoBehaviour
 
             allFPSNoMargin += FPS_Value;
         }
-            
-
         float averageFPS = allFPS / FPSCount;
         float averageFPSNoMargin = allFPSNoMargin / FPS_List.Count;
         triCount = 0;
@@ -103,8 +101,8 @@ public class Log : MonoBehaviour
         {
             File.AppendAllText(filePath, $"Logged data for Tessellation run!\n");
             File.AppendAllText(filePath, $"Total Tessellation Amount: {tessellation}\n");
-            triCount = TriangleCounter.CalculateTrianglesWithTessellation(UnityEditor.UnityStats.triangles - 2,
-                tessellation);
+            triCount = TriangleCounter.CalculateTrianglesWithTessellation(UnityEditor.UnityStats.triangles 
+                                                                          - 2, tessellation);
         }
         if (isRunningTriangle)
         {
@@ -121,8 +119,6 @@ public class Log : MonoBehaviour
             string fps = Mathf.Abs(FPS_Value - median) < fpsMargin ? $"{FPS_Value}" : $"-{FPS_Value}-";
             File.AppendAllText(filePath, $"{fps}\n"); 
         }
-            
-        
         Debug.Log("File Generated");
         CreateMultiLogFile(averageFPS);
     }
