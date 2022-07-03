@@ -2,10 +2,8 @@ Shader "Custom/Tessellation"
 {
     Properties
     {
-        _Tess ("Tessellation", Range(1,64)) = 4
+        _Tess ("Tessellation", Range(1,102400)) = 4
         _MainTex ("Base (RGB)", 2D) = "white" {}
-        _DispTex ("Disp Texture", 2D) = "gray" {}
-        _NormalMap ("Normalmap", 2D) = "bump" {}
         _Displacement ("Displacement", Range(0, 1.0)) = 0.3
         _Waves ("Waves", Range(0, 5.0)) = 1.0
         _WaveSpeed ("WaveSpeed", Range(0, 50)) = 5

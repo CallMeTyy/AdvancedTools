@@ -1,0 +1,29 @@
+=== FPS Log ===
+
+Average FPS: 12.70341
+Average FPS Without Margin: 61.88682
+Total FPS Measured: 13
+
+Running VR!
+
+Logged data for Triangle run!
+Total Triangle Count: 285640070
+
+===============
+
+All FPS Values:
+-499-
+-263-
+27
+27
+26
+15
+11
+9
+8
+7
+6
+6
+6
+5
+5

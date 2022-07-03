@@ -34,8 +34,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Displacement: 0.393
-    - _Tess: 37
+    - _Displacement: 0.33
+    - _Tess: 15
     - _VertexCount: 0
     - _WaveSpeed: 20
     - _Waves: 0.3

@@ -11,7 +11,7 @@ Run 8: Average FPS: 112.4377
 Run 9: Average FPS: 113.2159
 Run 10: Average FPS: 112.8335
 
-=== FPS Log - Tessellation - Tri: 20000 - Tess: 3 - 1/7 14:1:2 ===
+=== FPS Log - Tessellation - Tri: 260000 - Tess: 3 - 1/7 14:1:2 ===
 Run 1: Average FPS: 112.5039
 Run 2: Average FPS: 112.8897
 Run 3: Average FPS: 112.6354
@@ -202,3 +202,63 @@ Run 7: Average FPS: 112.1543
 Run 8: Average FPS: 112.161
 Run 9: Average FPS: 112.1791
 Run 10: Average FPS: 112.0151
+
+=== FPS Log - Tessellation - Tri: 60740000 - Tess: 45 - 1/7 17:38:46 ===
+Run 1: Average FPS: 112.5713
+Run 2: Average FPS: 112.8408
+Run 3: Average FPS: 112.3898
+Run 4: Average FPS: 111.5611
+Run 5: Average FPS: 111.9437
+Run 6: Average FPS: 111.5634
+Run 7: Average FPS: 111.1001
+Run 8: Average FPS: 111.882
+Run 9: Average FPS: 111.8821
+Run 10: Average FPS: 111.539
+
+=== FPS Log - Tessellation - Tri: 84260000 - Tess: 53 - 1/7 17:42:26 ===
+Run 1: Average FPS: 87.1842
+Run 2: Average FPS: 87.12923
+Run 3: Average FPS: 87.00766
+Run 4: Average FPS: 87.07411
+Run 5: Average FPS: 87.37803
+Run 6: Average FPS: 87.17384
+Run 7: Average FPS: 87.03968
+Run 8: Average FPS: 87.02209
+Run 9: Average FPS: 87.17922
+Run 10: Average FPS: 86.84481
+
+=== FPS Log - Tessellation - Tri: 111620000 - Tess: 61 - 1/7 17:46:9 ===
+Run 1: Average FPS: 69.98933
+Run 2: Average FPS: 70.53385
+Run 3: Average FPS: 70.166
+Run 4: Average FPS: 70.3659
+Run 5: Average FPS: 70.21677
+Run 6: Average FPS: 70.29302
+Run 7: Average FPS: 70.2169
+Run 8: Average FPS: 70.33567
+Run 9: Average FPS: 70.14439
+Run 10: Average FPS: 70.49591
+
+=== FPS Log - Tessellation - Tri: 142820000 - Tess: 69 - 1/7 17:29:56 ===
+Run 1: Average FPS: 66.49194
+Run 2: Average FPS: 66.11728
+Run 3: Average FPS: 65.72659
+Run 4: Average FPS: 65.99652
+Run 5: Average FPS: 65.98708
+Run 6: Average FPS: 66.19217
+Run 7: Average FPS: 65.90866
+Run 8: Average FPS: 66.07851
+Run 9: Average FPS: 66.2785
+Run 10: Average FPS: 66.17472
+
+=== FPS Log - Tessellation - Tri: 216740000 - Tess: 85 - 1/7 17:59:21 ===
+Run 1: Average FPS: 66.46035
+Run 2: Average FPS: 65.99401
+Run 3: Average FPS: 66.27092
+Run 4: Average FPS: 65.94288
+Run 5: Average FPS: 66.04838
+Run 6: Average FPS: 66.27965
+Run 7: Average FPS: 66.11735
+Run 8: Average FPS: 65.76732
+Run 9: Average FPS: 65.96413
+Run 10: Average FPS: 66.10765

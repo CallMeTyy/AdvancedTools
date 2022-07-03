@@ -215,62 +215,74 @@ Run 8: Average FPS: 37.8123
 Run 9: Average FPS: 37.12873
 Run 10: Average FPS: 36.92312
 
-=== FPS Log - Triangle - Tri: 45620000 - Tess: 39 - 1/7 16:20:57 ===
-Run 1: Average FPS: 32.92298
-Run 2: Average FPS: 33.08677
-Run 3: Average FPS: 32.67677
-Run 4: Average FPS: 33.10651
-Run 5: Average FPS: 33.10014
-Run 6: Average FPS: 32.46978
-Run 7: Average FPS: 33.09077
-Run 8: Average FPS: 33.06404
-Run 9: Average FPS: 32.45903
-Run 10: Average FPS: 33.09451
+=== FPS Log - Triangle - Tri: 41060000 - Tess: 37 - 1/7 17:3:32 ===
+Run 1: Average FPS: 30.43785
+Run 2: Average FPS: 29.66775
+Run 3: Average FPS: 30.15092
+Run 4: Average FPS: 30.12216
+Run 5: Average FPS: 29.36077
+Run 6: Average FPS: 30.07409
+Run 7: Average FPS: 30.12745
+Run 8: Average FPS: 29.35586
+Run 9: Average FPS: 30.15698
+Run 10: Average FPS: 30.15473
 
-=== FPS Log - Triangle - Tri: 45620000 - Tess: 43 - 1/7 16:23:57 ===
-Run 1: Average FPS: 30.09487
-Run 2: Average FPS: 29.7035
-Run 3: Average FPS: 30.09856
-Run 4: Average FPS: 30.09426
-Run 5: Average FPS: 29.58001
-Run 6: Average FPS: 30.1048
-Run 7: Average FPS: 30.14849
-Run 8: Average FPS: 29.55514
-Run 9: Average FPS: 30.02207
-Run 10: Average FPS: 30.03026
+=== FPS Log - Triangle - Tri: 50420000 - Tess: 41 - 1/7 17:6:51 ===
+Run 1: Average FPS: 24.47384
+Run 2: Average FPS: 25.39873
+Run 3: Average FPS: 25.39563
+Run 4: Average FPS: 24.75762
+Run 5: Average FPS: 25.27244
+Run 6: Average FPS: 25.20881
+Run 7: Average FPS: 24.60686
+Run 8: Average FPS: 25.18756
+Run 9: Average FPS: 25.25901
+Run 10: Average FPS: 24.59584
 
-=== FPS Log - Triangle - Tri: 55460000 - Tess: 47 - 1/7 16:27:1 ===
-Run 1: Average FPS: 28.07777
-Run 2: Average FPS: 28.27143
-Run 3: Average FPS: 28.29293
-Run 4: Average FPS: 27.84625
-Run 5: Average FPS: 28.19895
-Run 6: Average FPS: 28.17073
-Run 7: Average FPS: 27.84333
-Run 8: Average FPS: 28.19929
-Run 9: Average FPS: 28.20216
-Run 10: Average FPS: 27.88291
+=== FPS Log - Triangle - Tri: 60740000 - Tess: 45 - 1/7 17:10:14 ===
+Run 1: Average FPS: 21.47695
+Run 2: Average FPS: 21.68477
+Run 3: Average FPS: 21.16178
+Run 4: Average FPS: 21.58177
+Run 5: Average FPS: 21.48327
+Run 6: Average FPS: 21.22272
+Run 7: Average FPS: 21.44377
+Run 8: Average FPS: 21.60721
+Run 9: Average FPS: 21.16354
+Run 10: Average FPS: 21.50859
 
-=== FPS Log - Triangle - Tri: 66260000 - Tess: 51 - 1/7 16:30:7 ===
-Run 1: Average FPS: 27.23488
-Run 2: Average FPS: 27.22312
-Run 3: Average FPS: 27.15477
-Run 4: Average FPS: 27.22412
-Run 5: Average FPS: 27.21958
-Run 6: Average FPS: 27.16251
-Run 7: Average FPS: 27.23055
-Run 8: Average FPS: 27.25638
-Run 9: Average FPS: 27.06231
-Run 10: Average FPS: 27.1956
+=== FPS Log - Triangle - Tri: 84260000 - Tess: 53 - 1/7 17:17:42 ===
+Run 1: Average FPS: 16.54554
+Run 2: Average FPS: 16.41257
+Run 3: Average FPS: 16.37753
+Run 4: Average FPS: 16.16107
+Run 5: Average FPS: 16.31726
+Run 6: Average FPS: 16.36664
+Run 7: Average FPS: 16.30346
+Run 8: Average FPS: 16.29639
+Run 9: Average FPS: 16.36117
+Run 10: Average FPS: 16.41204
 
-=== FPS Log - Triangle - Tri: 78020000 - Tess: 55 - 1/7 16:33:14 ===
-Run 1: Average FPS: 26.9021
-Run 2: Average FPS: 26.71178
-Run 3: Average FPS: 26.92308
-Run 4: Average FPS: 26.90779
-Run 5: Average FPS: 26.68355
-Run 6: Average FPS: 26.92902
-Run 7: Average FPS: 26.90342
-Run 8: Average FPS: 26.59044
-Run 9: Average FPS: 26.90957
-Run 10: Average FPS: 26.77093
+=== FPS Log - Triangle - Tri: 111620000 - Tess: 61 - 1/7 17:21:10 ===
+Run 1: Average FPS: 13.10888
+Run 2: Average FPS: 13.11283
+Run 3: Average FPS: 13.07808
+Run 4: Average FPS: 13.12647
+Run 5: Average FPS: 13.09098
+Run 6: Average FPS: 13.09241
+Run 7: Average FPS: 13.2247
+Run 8: Average FPS: 13.09319
+Run 9: Average FPS: 13.09938
+Run 10: Average FPS: 13.16341
+
+=== FPS Log - Triangle - Tri: 142820000 - Tess: 69 - 1/7 17:24:41 ===
+Run 1: Average FPS: 11.20971
+Run 2: Average FPS: 11.20275
+Run 3: Average FPS: 11.23322
+Run 4: Average FPS: 11.17546
+Run 5: Average FPS: 11.19905
+Run 6: Average FPS: 11.1125
+Run 7: Average FPS: 11.19491
+Run 8: Average FPS: 11.17149
+Run 9: Average FPS: 11.23522
+Run 10: Average FPS: 11.2008

@@ -47,8 +47,9 @@ public class Log : MonoBehaviour
 
     private void Update()
     {
-        deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
+        deltaTime += (Time.deltaTime - deltaTime) * 0.1f; // https://answers.unity.com/questions/1189486/how-to-see-fps-frames-per-second.html
         float fps = 1.0f / deltaTime;
+        print(fps);
         FPS_List.Add(fps);
     }
 
@@ -75,6 +76,7 @@ public class Log : MonoBehaviour
 
         int FPSCount = FPS_List.Count;
         float allFPS = 0;
+        float allFPSNoMargin = 0;
 
         // Get a median to filter out unwanted FPS spikes
         float median = FPS_List[FPSCount / 2];
@@ -84,13 +86,17 @@ public class Log : MonoBehaviour
         {
             if (Mathf.Abs(FPS_Value - median) < fpsMargin) allFPS += FPS_Value;
             else FPSCount--;
+
+            allFPSNoMargin += FPS_Value;
         }
             
 
         float averageFPS = allFPS / FPSCount;
+        float averageFPSNoMargin = allFPSNoMargin / FPS_List.Count;
         triCount = 0;
 
         File.AppendAllText(filePath, $"Average FPS: {averageFPS}\n");
+        File.AppendAllText(filePath, $"Average FPS Without Margin: {averageFPSNoMargin}\n");
         File.AppendAllText(filePath, $"Total FPS Measured: {FPSCount}\n\n");
         if (isVR) File.AppendAllText(filePath, $"Running VR!\n\n");
         if (isRunningTessellation)
@@ -112,7 +118,7 @@ public class Log : MonoBehaviour
         File.AppendAllText(filePath, $"All FPS Values:\n");
         foreach (int FPS_Value in FPS_List)
         {
-            string fps = Mathf.Abs(FPS_Value - median) < fpsMargin ? $"-{FPS_Value}-" : FPS_Value.ToString();
+            string fps = Mathf.Abs(FPS_Value - median) < fpsMargin ? $"{FPS_Value}" : $"-{FPS_Value}-";
             File.AppendAllText(filePath, $"{fps}\n"); 
         }
             
@@ -149,7 +155,7 @@ public class Log : MonoBehaviour
             
             if (IncreaseTessellationOnNextRun && tessellation < StopAtTessellation)
             {
-                tessellation = Mathf.Min(tessellation + TessellationIncrement, 64);
+                tessellation = Mathf.Min(tessellation + TessellationIncrement, 69);
                 
                 shaderMaterial.SetFloat("_Tess", tessellation);
                 
@@ -159,7 +165,7 @@ public class Log : MonoBehaviour
                 }
                 
                 PlayerPrefs.SetInt("Run", 1);
-                StartNewRun();
+                //StartNewRun();
                 
 #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = true;
@@ -193,7 +199,8 @@ public class Log : MonoBehaviour
         if (isRunningTessellation) mode = "Tessellation";
         if (isRunningTriangle) mode = "Triangle";
         DateTime date = DateTime.Now;
-        File.AppendAllText(path, $"\n=== FPS Log - {mode} - Tri: {triCount} - Tess: {tessellation} - {date.Day}/{date.Month} {date.Hour}:{date.Minute}:{date.Second} ===\n");
+        if (isVR)  File.AppendAllText(path, $"\n=== VR - FPS Log - {mode} - Tri: {triCount} - Tess: {tessellation} - {date.Day}/{date.Month} {date.Hour}:{date.Minute}:{date.Second} ===\n");
+        else File.AppendAllText(path, $"\n=== FPS Log - {mode} - Tri: {triCount} - Tess: {tessellation} - {date.Day}/{date.Month} {date.Hour}:{date.Minute}:{date.Second} ===\n");
     }
 
     private void CreateMultiLogFile(float averageFPS)

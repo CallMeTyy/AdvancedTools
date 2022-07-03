@@ -8,7 +8,7 @@ public class MeshBuilder : MonoBehaviour
 {
     public int TriangleCount;
     public bool debug;
-    
+    public bool isTerrainMesh;
 
     [SerializeField] private Material _mat;
 
@@ -30,15 +30,16 @@ public class MeshBuilder : MonoBehaviour
     public void CreatePlaneWithTessellationAmount(float tessellation = -1)
     {
         long triCount;
+        int fromTriangles = isTerrainMesh ? 5000 : 2;
         if (tessellation == -1)
         {
             tessellation = _mat.GetFloat("_Tess");
-            triCount = TriangleCounter.CalculateTrianglesWithTessellation(2,
+            triCount = TriangleCounter.CalculateTrianglesWithTessellation(fromTriangles,
                 tessellation);
         }
         else
         {
-            triCount = TriangleCounter.CalculateTrianglesWithTessellation(2,
+            triCount = TriangleCounter.CalculateTrianglesWithTessellation(fromTriangles,
                 tessellation);
         }
         print(tessellation);

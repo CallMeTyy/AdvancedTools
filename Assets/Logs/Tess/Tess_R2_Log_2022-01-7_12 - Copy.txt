@@ -1,0 +1,68 @@
+=== FPS Log ===
+
+Average FPS: 20.76711
+Average FPS Without Margin: 34.38265
+Total FPS Measured: 51
+
+Running VR!
+
+Logged data for Tessellation run!
+Total Tessellation Amount: 69
+Total Triangle Count: 286139870
+
+===============
+
+All FPS Values:
+-499-
+-263-
+27
+26
+26
+26
+26
+25
+25
+16
+17
+18
+19
+19
+20
+20
+19
+19
+20
+21
+21
+21
+22
+22
+22
+22
+22
+22
+15
+16
+17
+18
+18
+19
+19
+20
+20
+20
+21
+21
+21
+22
+22
+22
+22
+22
+23
+13
+14
+15
+16
+17
+17
