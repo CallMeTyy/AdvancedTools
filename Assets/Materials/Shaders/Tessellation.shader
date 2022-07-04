@@ -2,14 +2,13 @@ Shader "Custom/Tessellation"
 {
     Properties
     {
-        _Tess ("Tessellation", Range(1,102400)) = 4
+        _Tess ("Tessellation", Range(1,83)) = 4
         _MainTex ("Base (RGB)", 2D) = "white" {}
         _Displacement ("Displacement", Range(0, 1.0)) = 0.3
         _Waves ("Waves", Range(0, 5.0)) = 1.0
         _WaveSpeed ("WaveSpeed", Range(0, 50)) = 5
         _VertexCount ("VertexCount", int) = 0
         _Color ("Color", color) = (1,1,1,0)
-        _SpecColor ("Spec color", color) = (0.5,0.5,0.5,0.5)
     }
     SubShader
     {
@@ -29,7 +28,6 @@ Shader "Custom/Tessellation"
             float4 tangent : TANGENT;
             float3 normal : NORMAL;
             float2 texcoord : TEXCOORD0;
-            //float1 vertexCount : FLOAT;
         };
 
         float _Tess;
@@ -37,8 +35,7 @@ Shader "Custom/Tessellation"
         float4 tessFixed()
         {
             return _Tess;
-        }
-        
+        }       
 
         sampler2D _DispTex;
         float _Displacement;
@@ -48,16 +45,13 @@ Shader "Custom/Tessellation"
 
         void disp(inout appdata v)
         {
-            //float d = tex2Dlod(_DispTex, float4(v.texcoord.xy,0,0)).r * _Displacement;
             float3 worldpos = mul(unity_ObjectToWorld, v.vertex);
             float d = sin(worldpos.x * UNITY_PI * _Waves + _Time * _WaveSpeed) * _Displacement + cos(
                 worldpos.z * UNITY_PI * _Waves) * _Displacement;
             
             v.vertex.y += d + 1;
 
-        }
-
-        
+        }       
 
         struct Input
         {
@@ -66,7 +60,6 @@ Shader "Custom/Tessellation"
         };
 
         sampler2D _MainTex;
-        sampler2D _NormalMap;
         
         fixed4 _Color;
 
@@ -78,7 +71,7 @@ Shader "Custom/Tessellation"
             o.Albedo = c.rgb;
             o.Specular = 0.2;
             o.Gloss = 1.0;
-            o.Normal = UnpackNormal(tex2D(_NormalMap, IN.uv_MainTex));
+            o.Normal = float3(0,1,0);
         }
         ENDCG
     }

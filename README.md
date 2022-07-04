@@ -16,8 +16,34 @@ would already be at the aimed level. But is this actually better?
 
 ## Tessellation
 
-// Tessellation Description
+Tessellation is the subdivision of triangles into more triangles. Implementing Tessellation in Unity can be done in two ways; by hand or by using Unity functions. The Unity example that was used to create all tests used the Unity way, so that was used in the project. I will still give a quick rundown how it is normally done:
 
+Tessellation itself happens after the vertex shader, and it works in a few stages:
+1. Hull Stage
+2. Tessellator Stage
+3. Domain Stage
+
+The Hull Stage runs once per vertex per patch, and recieves all data from the vertexes that form a triangle. It outputs a patch that will be used in later stages. Next to this stage in parallel there's also the Patch Constant Function. This runs once per patch and needs to output the Tessellation Factors.
+
+The tessellator runs after the hull stage and takes the data from the hull stage and outputs the new subdivided triangles. For each triangle it creates barycentric coordinates which is basically a way of defining the position based on the previous corners (see image below).
+
+![Img](https://i.ibb.co/thKSn02/image.png)  
+
+Finally, the domain stage runs once per vertex on the tessellated mesh. It takes all information from the previous 2 stages and it's job is to output the final data for the mesh. Within this function most of the fun things can be done. It behaves much like the vertex function but here you can access the tessellated vertices as well. Here most of the visual shader information can be applied.
+
+After these stages you can still call a geometry shader if needed, but most offset can be done within the domain stage.
+
+In Unity's version of tessellation things might appear a bit different, but in essence they still work the same. The vertex function however, might appear that it runs after the tessellation stage. This is however not possible, and is either a re-worked Domain stage or Geometry function in disguise. In the used shader version (4.6) only the tessellate stage can be defined. Within this stage however, multiple functions can be called to use different ways of tessellation. It can also be used to generate distance based tessellation.
+
+Tessellation has multiple partitioning modes:
+- Integeral: Subdivide based on the ceiling of the Tessellation Factor. It subdivides very evenly, but not smoothly.
+- Exponential - Odd: Smoothly subdivides based on the tessellation factor. Starts a new subdivision every odd number.
+- Exponential - Even: Smoothly subdivides based on the tessellation factor. Starts a new subdivision every even number.
+- Pow 2: Very similar to integeral, it subdivides based on the ceiling of the power of the Tessellation Factor. It subdivides very evenly, but not smoothly.
+
+The Unity way uses Exponential - Odd, which is also what was used for testing. This means that only odd numbers are interesting to test, as only on those numbers the subdivision reached its maxed size before being subdivided again. In the image below you can see how it subdivides in Exponential Odd. With tessellation 1 it does no subdivisions, and tessellation 4 & 5 contain the same amount of triangles. This means that every 2 levels of tessellations, the triangles get subdivided.
+
+![subdivisions](https://i.ibb.co/Xz20sb4/image.png)
 
 ## Test Setup
 
@@ -122,10 +148,16 @@ The following tables show all the data gathered:
 
 ## Conclusion
 
-// Conclusion
+Judging from the data it can be concluded that Tessellation is more effective at keeping up performance than using highly triangulated planes. Both in normal environments and in VR environments tessellation is a good way of creating high detail meshes for things such as water or to add detail to planes such as roads. On lower triangle counts however, performance is very similar. So on lower triangle counts both could be used.
 
 ## Retrospective
 
-// Retrospective
+As for the conclusion, no occlusion culling or Distance based tessellation have been taken into account. This could widely alter the FPS.
 
-The lower amount of runs means that it is less reliable. In a seperate future test I would want to see if just rendering two cameras would yield the same amount of FPS as running the game in VR, meaning you could use 
+This test setup was not something you would usually have in a scene, as many planes were needed to bring down FPS. Usually this would be done by other factors such as other scripts, models or terrain. This means that the result may be different per use case.
+
+All tests were done in an as similar possible environment, and done multiple times to generate an as reliable number as possible. This however is not enough to generate perfect data. Other factors such as time, temperature and even Unity Engine bugs could have influenced data. All data for test 1 was aqcuired in one day, in one session. No other programs were opened to minimise risk. One program that could not be shut down and could have influenced results heavily was the antivirus (Antivirus Malware Service Executable) that has haunted me for years.
+
+The second test for VR however, was not as reliable. Due to the fact that a VR headset must be worn throughout the tests a lot less results were feasible. I also ran way less tests so a complete fair comparison with test 1 is also impossible. It also required steam and steamVR to be active at all times which could also influence results. 
+
+In a seperate future test I would want to see if just rendering two cameras would yield the same amount of FPS as running the game in VR, meaning you could use that to test out performance in VR without the need of wearing or even owning a VR headset.
