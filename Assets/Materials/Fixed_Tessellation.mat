@@ -35,7 +35,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Displacement: 0.33
-    - _Tess: 15
+    - _Tess: 1
     - _VertexCount: 0
     - _WaveSpeed: 20
     - _Waves: 0.3

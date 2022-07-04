@@ -177,6 +177,11 @@ public class Log : MonoBehaviour
         #endif
         PlayerPrefs.SetInt("Run", 1);
         PlayerPrefs.SetInt("Stop", 0);
+        
+        if (isRunningTriangle)
+        {
+            MeshBuilder.CreatePlaneWithTessellation(shaderMaterial.GetFloat("_Tess"));
+        }
     }
 
     public void StopTest()
